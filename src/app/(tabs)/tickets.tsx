@@ -202,26 +202,26 @@ export default function TicketsScreen() {
                       ${item.price.toFixed(2)}
                     </Text>
                   </View>
-                  {upcoming ? (
-                    <Pressable
-                      accessibilityRole="button"
-                      className="flex-row items-center gap-2 rounded-full bg-[#111111] px-4 py-2.5 active:bg-[#343434] dark:bg-[#f5f2ec]"
-                      onPress={() =>
-                        router.push({
-                          pathname: "/orders/[id]" as RelativePathString,
-                          params: { id: item.id },
-                        })
-                      }
-                    >
-                      <QrCode
-                        size={16}
-                        color={isDark ? "#111111" : "#ffffff"}
-                      />
-                      <Text className="text-sm font-semibold text-white dark:text-[#111111]">
-                        View ticket
-                      </Text>
-                    </Pressable>
-                  ) : null}
+
+                  <Pressable
+                    accessibilityRole="button"
+                    className="flex-row items-center gap-2 rounded-full bg-[#111111] px-4 py-2.5 active:bg-[#343434] dark:bg-[#f5f2ec]"
+                    onPress={() =>
+                      router.push({
+                        pathname: "/orders/[id]" as RelativePathString,
+                        params: { id: item.id },
+                      })
+                    }
+                  >
+                    {upcoming ? (
+                      <QrCode size={16} color={isDark ? "#111111" : "#ffffff"} />
+                    ) : (
+                      <Ticket size={16} color={isDark ? "#111111" : "#ffffff"} />
+                    )}
+                    <Text className="text-sm font-semibold text-white dark:text-[#111111]">
+                      {upcoming ? "View ticket" : "View details"}
+                    </Text>
+                  </Pressable>
                 </View>
               </View>
 

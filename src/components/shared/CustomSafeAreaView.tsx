@@ -1,17 +1,17 @@
 import { Colors } from "@/constants/theme";
 import { PropsWithChildren } from "react";
+import { useColorScheme } from "nativewind";
 import {
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
-  useColorScheme,
 } from "react-native";
 import { SafeAreaView, SafeAreaViewProps } from "react-native-safe-area-context";
 
 type Props = PropsWithChildren<SafeAreaViewProps>;
 
 const CustomSafeAreaView = ({ children, style, ...rest }: Props) => {
-  const scheme = useColorScheme();
+  const { colorScheme: scheme } = useColorScheme();
   const colors = Colors[scheme === "dark" ? "dark" : "light"];
 
   return (

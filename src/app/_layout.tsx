@@ -6,12 +6,12 @@ import { useFonts } from "expo-font";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "expo-router";
 import { Stack } from "expo-router/stack";
 import * as SplashScreen from "expo-splash-screen";
-import { useColorScheme } from "react-native";
+import { useColorScheme } from "nativewind";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useColorScheme();
   const [fontsLoaded, fontError] = useFonts([
     {
       fontFamily: "PlusJakartaSans",
@@ -44,7 +44,7 @@ export default function RootLayout() {
 }
 
 function RootNavigator() {
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useColorScheme();
   const { access } = useSession();
   const entered = access !== null;
   const signedIn = access === "signed-in";

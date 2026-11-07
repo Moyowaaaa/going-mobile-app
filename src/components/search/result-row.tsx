@@ -13,6 +13,7 @@ export type ResultRowProps = {
   price: string;
   color: string;
   favorite: boolean;
+  onPress: (title: string) => void;
   onToggleFavorite: (title: string) => void;
 };
 
@@ -29,17 +30,18 @@ export const ResultRow = memo(function ResultRow({
   price,
   color,
   favorite,
+  onPress,
   onToggleFavorite,
 }: ResultRowProps) {
   const palette = getEventPalette(color);
-  const handlePress = useCallback(() => onToggleFavorite(title), [onToggleFavorite, title]);
+  const handleOpen = useCallback(() => onPress(title), [onPress, title]);
+  const handleFavorite = useCallback(() => onToggleFavorite(title), [onToggleFavorite, title]);
 
   return (
     <Pressable
-      onPress={handlePress}
+      onPress={handleOpen}
       accessibilityRole="button"
-      accessibilityState={{ selected: favorite }}
-      accessibilityLabel={`${favorite ? "Remove" : "Save"} ${title}, ${date} at ${location}`}
+      accessibilityLabel={`${title}, ${date} at ${location}`}
       style={styles.row}
       className="flex-row items-center gap-3 rounded-2xl bg-white p-3 active:opacity-70 dark:bg-[#151b2e]">
       <View style={[styles.thumb, { backgroundColor: palette.background }]}>
@@ -64,11 +66,19 @@ export const ResultRow = memo(function ResultRow({
         <Text className="text-sm font-semibold text-[#111111] dark:text-[#f5f2ec]">
           {price === "$0" ? "Free" : price}
         </Text>
-        <Heart
-          size={18}
-          color={favorite ? "#ff775d" : "#a9a9a3"}
-          fill={favorite ? "#ff775d" : "transparent"}
-        />
+        <Pressable
+          onPress={handleFavorite}
+          accessibilityRole="button"
+          accessibilityState={{ selected: favorite }}
+          accessibilityLabel={`${favorite ? "Remove" : "Save"} ${title}`}
+          hitSlop={8}
+          className="active:opacity-60">
+          <Heart
+            size={18}
+            color={favorite ? "#ff775d" : "#a9a9a3"}
+            fill={favorite ? "#ff775d" : "transparent"}
+          />
+        </Pressable>
       </View>
     </Pressable>
   );

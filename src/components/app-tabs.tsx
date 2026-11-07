@@ -1,11 +1,11 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { NativeTabs } from "expo-router/native-tabs";
-import { useColorScheme } from "react-native";
+import { useColorScheme } from "nativewind";
 
 import { Colors } from "@/constants/theme";
 
 export default function AppTabs() {
-  const scheme = useColorScheme();
+  const { colorScheme: scheme } = useColorScheme();
   const colors = Colors[scheme === "dark" ? "dark" : "light"];
 
   return (

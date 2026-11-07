@@ -43,6 +43,8 @@ const TicketPage = () => {
 
   if (!order) return <TicketNotFound />;
 
+  const upcoming = order.status === "Upcoming";
+
   return (
     <>
       <Stack.Screen options={{ title: `Order #${order.id}` }} />
@@ -85,7 +87,7 @@ const TicketPage = () => {
             <View className="mb-4 flex w-full flex-row items-center gap-2 text-white">
               <CheckCircle2 color={"white"} />
               <Text className="text-sm font-bold uppercase text-white">
-                Ticket confirmed
+                {upcoming ? "Ticket confirmed" : "Past booking"}
               </Text>
             </View>
             <Text className="font-display h-max text-5xl font-bold  text-white">
@@ -127,37 +129,63 @@ const TicketPage = () => {
               </View>
             </View>
 
-            <View className="items-center rounded-2xl bg-[#f7f7f5] p-7">
-              <View className="mb-4 h-48 w-48 items-center justify-center border-[10px] border-[#111111] bg-white">
-                <QrCode size={144} color="#111111" strokeWidth={1.4} />
+            {upcoming ? (
+              <View className="items-center rounded-2xl bg-[#f7f7f5] p-7">
+                <View className="mb-4 h-48 w-48 items-center justify-center border-[10px] border-[#111111] bg-white">
+                  <QrCode size={144} color="#111111" strokeWidth={1.4} />
+                </View>
+                <Text className="font-semibold text-[#111111]">
+                  Show this code at the door
+                </Text>
+                <Text className="mt-1 text-center text-xs text-[#777773]">
+                  Each ticket admits one person
+                </Text>
               </View>
-              <Text className="font-semibold text-[#111111]">
-                Show this code at the door
-              </Text>
-              <Text className="mt-1 text-center text-xs text-[#777773]">
-                Each ticket admits one person
-              </Text>
-            </View>
+            ) : (
+              <View className="gap-4 rounded-2xl bg-[#f7f7f5] p-7">
+                <Text className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#777773]">
+                  Booking summary
+                </Text>
+                <View className="flex-row items-center justify-between">
+                  <Text className="text-sm text-[#777773]">Tickets</Text>
+                  <Text className="font-semibold text-[#111111]">
+                    {order.ticketCount}
+                  </Text>
+                </View>
+                <View className="flex-row items-center justify-between">
+                  <Text className="text-sm text-[#777773]">Total paid</Text>
+                  <Text className="font-semibold text-[#111111]">
+                    ${order.price.toFixed(2)}
+                  </Text>
+                </View>
+                <Text className="text-sm leading-5 text-[#777773]">
+                  This event has already happened, so the entry code is no
+                  longer shown.
+                </Text>
+              </View>
+            )}
           </View>
 
           <View
             className={`gap-3 border-t border-dashed border-black/15 bg-[#fafaf8] p-7 ${wide ? "flex-row items-center justify-between" : ""}`}
           >
-            <Pressable
-              accessibilityRole="button"
-              onPress={() =>
-                Alert.alert(
-                  "Tickets saved",
-                  "Your tickets are available in My tickets.",
-                )
-              }
-              className="flex-row items-center justify-center gap-2 rounded-full border border-black/15 px-5 py-3 active:bg-black/5"
-            >
-              <Download size={16} color="#111111" />
-              <Text className="text-sm font-semibold text-[#111111]">
-                Download tickets
-              </Text>
-            </Pressable>
+            {upcoming ? (
+              <Pressable
+                accessibilityRole="button"
+                onPress={() =>
+                  Alert.alert(
+                    "Tickets saved",
+                    "Your tickets are available in My tickets.",
+                  )
+                }
+                className="flex-row items-center justify-center gap-2 rounded-full border border-black/15 px-5 py-3 active:bg-black/5"
+              >
+                <Download size={16} color="#111111" />
+                <Text className="text-sm font-semibold text-[#111111]">
+                  Download tickets
+                </Text>
+              </Pressable>
+            ) : null}
             <Pressable
               accessibilityRole="button"
               onPress={() => router.push("/")}

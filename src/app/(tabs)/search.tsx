@@ -10,10 +10,16 @@ import { ResultRow } from "@/components/search/result-row";
 import { AvailableEvents, eventCategories } from "@/constants/data";
 import { BottomTabInset, DisplayFont } from "@/constants/theme";
 import type { EventItem } from "@/constants/types";
+import { RelativePathString, useRouter } from "expo-router";
 
 const browseCategories = eventCategories.filter((category) => category !== "For you");
 
+function eventSlug(title: string) {
+  return title.toLowerCase().replaceAll(" ", "-").replaceAll(":", "");
+}
+
 export default function SearchScreen() {
+  const router = useRouter();
   const insets = useSafeAreaInsets();
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
@@ -51,6 +57,16 @@ export default function SearchScreen() {
       [value, ...previous.filter((item) => item !== value)].slice(0, 6),
     );
   }, []);
+
+  const handleOpenEvent = useCallback(
+    (title: string) => {
+      router.push({
+        pathname: "/events/[slug]" as RelativePathString,
+        params: { slug: eventSlug(title) },
+      });
+    },
+    [router],
+  );
 
   const handleToggleFavorite = useCallback((title: string) => {
     setFavorites((previous) =>
@@ -92,10 +108,11 @@ export default function SearchScreen() {
         price={item.price}
         color={item.color}
         favorite={favorites.includes(item.title)}
+        onPress={handleOpenEvent}
         onToggleFavorite={handleToggleFavorite}
       />
     ),
-    [favorites, handleToggleFavorite],
+    [favorites, handleOpenEvent, handleToggleFavorite],
   );
 
   const listHeader = isSearching ? (
