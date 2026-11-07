@@ -20,11 +20,19 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
       "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow going to use your photos for event banners.",
+          "microphonePermission": false
+        }
+      ],
       [
         "expo-splash-screen",
         {
