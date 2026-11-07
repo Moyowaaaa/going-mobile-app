@@ -17,6 +17,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MenuSection, type MenuItem } from "@/components/profile/menu-section";
+import { useSession } from "@/context/session";
 import { BottomTabInset, DisplayFont } from "@/constants/theme";
 import { confirmAction, showAlert } from "@/lib/alert";
 
@@ -86,6 +87,7 @@ const supportItems: MenuItem[] = [
 ];
 
 export default function ProfileScreen() {
+  const { signOut } = useSession();
   const { colorScheme, setColorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
   const [pushEnabled, setPushEnabled] = useState(true);
@@ -114,7 +116,7 @@ export default function ProfileScreen() {
       title: "Sign out?",
       message: "You can sign back in any time.",
       confirmLabel: "Sign out",
-      onConfirm: () => {},
+      onConfirm: signOut,
     });
   }
 

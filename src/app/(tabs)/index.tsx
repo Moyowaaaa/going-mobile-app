@@ -101,6 +101,7 @@ export default function HomeScreen() {
             </Pressable>
 
             <Pressable
+              onPress={() => router.push("/checkout")}
               accessibilityRole="button"
               accessibilityLabel={`Shopping cart, ${cartCount} items`}
               className="h-10 w-10 items-center justify-center rounded-full active:bg-black/5 dark:active:bg-white/10"
@@ -198,7 +199,7 @@ export default function HomeScreen() {
                   event={event}
                   favorite={favorites.includes(event.title)}
                   onToggleFavorite={() => toggleFavorite(event.title)}
-                  onGetTickets={() => setCartCount((count) => count + 1)}
+        
                 />
               </View>
             ))}

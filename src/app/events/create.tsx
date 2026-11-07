@@ -24,9 +24,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { accentOptions } from "@/constants/event-colors";
 import { DisplayFont } from "@/constants/theme";
-
-const accentOptions = ["#ff775d", "#f4b942", "#55b8a3", "#8f8cf5", "#e878b5"];
 const defaultCover = require("../../../assets/images/event-create-banner.png");
 
 const fieldClass =
@@ -230,7 +229,7 @@ export default function CreateEventPage() {
           Event accent
         </Text>
       </View>
-      <View className="flex-row gap-2">
+      <View className="flex-row flex-wrap gap-2">
         {accentOptions.map((color) => {
           const selected = accent === color;
           return (

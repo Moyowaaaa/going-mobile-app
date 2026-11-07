@@ -9,7 +9,6 @@
 //   onBoardingScreenText,
 //   tripType,
 // } from "./types";
-import { ImageSourcePropType } from "react-native";
 
 import type { EventItem, order, PopularEventItem } from "./types";
 
@@ -19,7 +18,7 @@ export const popularEvents: PopularEventItem[] = [
     title: "Solange: Night Bloom",
     meta: "Fri, Jun 20 · Pier 17",
     type: [""],
-    color: "music",
+    color: "#2a3070",
     ticketsSold: "2.4k",
   },
   {
@@ -27,7 +26,7 @@ export const popularEvents: PopularEventItem[] = [
     title: "House of Yes: Genesis",
     meta: "Sat, Jun 28 · Queens",
     type: [""],
-    color: "house",
+    color: "#e19a4c",
     ticketsSold: "1.8k",
   },
   {
@@ -35,7 +34,7 @@ export const popularEvents: PopularEventItem[] = [
     title: "The Midnight Market",
     meta: "Sat, Jun 14 · Brooklyn",
     type: [""],
-    color: "market",
+    color: "#d7a36c",
     ticketsSold: "1.2k",
   },
 ];
@@ -57,7 +56,7 @@ export const AvailableEvents: EventItem[] = [
     time: "7:00 PM",
     location: "The Foundry, Brooklyn",
     price: "$24",
-    color: "market",
+    color: "#d7a36c",
   },
   {
     title: "Solange: Night Bloom",
@@ -66,7 +65,7 @@ export const AvailableEvents: EventItem[] = [
     time: "8:30 PM",
     location: "Pier 17, New York",
     price: "$68",
-    color: "music",
+    color: "#2a3070",
     featured: true,
   },
   {
@@ -76,7 +75,7 @@ export const AvailableEvents: EventItem[] = [
     time: "11:00 AM",
     location: "Industry City, Brooklyn",
     price: "$12",
-    color: "makers",
+    color: "#bdc7bb",
   },
   {
     title: "Rooftop Cinema Club",
@@ -85,7 +84,7 @@ export const AvailableEvents: EventItem[] = [
     time: "9:00 PM",
     location: "The Skylark, Manhattan",
     price: "$18",
-    color: "cinema",
+    color: "#d76e4d",
   },
   {
     title: "House of Yes: Genesis",
@@ -94,7 +93,7 @@ export const AvailableEvents: EventItem[] = [
     time: "10:00 PM",
     location: "House of Yes, Queens",
     price: "$35",
-    color: "house",
+    color: "#e19a4c",
   },
   {
     title: "Sunday Sounds",
@@ -103,11 +102,31 @@ export const AvailableEvents: EventItem[] = [
     time: "2:00 PM",
     location: "Central Park, New York",
     price: "$0",
-    color: "sounds",
+    color: "#7f9eaf",
   },
 ];
 
-
-export const orders:order[] = [  { id: 'GO-240614-01', title: 'The Midnight Market', date: 'Sat, Jun 14 · 7:00 PM', location: 'The Foundry, Brooklyn', ticketCount: 2, price:48, status: 'Upcoming', color: 'market' },
-  { id: 'GO-240528-09', title: 'Spring Studio Sessions', date: 'Wed, May 28 · 8:00 PM', location: 'Public Records, Brooklyn', ticketCount: 1, price: 32, status: 'Past', color: 'music' },
-]
+export const orders: order[] = [
+  {
+    id: "GO-240614-01",
+    title: "The Midnight Market",
+    date: "Sat, Jun 14 · 7:00 PM",
+    location: "The Foundry, Brooklyn",
+    ticketCount: 2,
+    price: 48,
+    status: "Upcoming",
+    color: "teal",
+    event: AvailableEvents[0],
+  },
+  {
+    id: "GO-240528-09",
+    title: "Spring Studio Sessions",
+    date: "Wed, May 28 · 8:00 PM",
+    location: "Public Records, Brooklyn",
+    ticketCount: 1,
+    price: 32,
+    status: "Past",
+    color: "#2a3070",
+    event: AvailableEvents[5],
+  },
+];

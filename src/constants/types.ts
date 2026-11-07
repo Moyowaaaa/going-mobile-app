@@ -20,7 +20,9 @@ export interface EventItem extends PopularEventItem {
 }
 
 
-export type order = {id:string, title:string, date:string; location:string, ticketCount:number, price:number, status:string, color:string}
+export type order = {
+  event:EventItem,
+  id:string, title:string, date:string; location:string, ticketCount:number, price:number, status:string, color:string}
 
 
 export type notification = {

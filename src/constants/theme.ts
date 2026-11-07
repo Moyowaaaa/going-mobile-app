@@ -17,7 +17,7 @@ export const Colors = {
   },
   dark: {
     text: "#ffffff",
-    background: "#000000",
+    background: "#0b1020",
     backgroundElement: "#212225",
     backgroundSelected: "#2E3135",
     textSecondary: "#B0B4BA",
@@ -29,7 +29,7 @@ export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: "system-ui",
+    sans: "PlusJakartaSans",
     /** iOS `UIFontDescriptorSystemDesignSerif` */
     serif: "ui-serif",
     /** iOS `UIFontDescriptorSystemDesignRounded` */
@@ -38,25 +38,21 @@ export const Fonts = Platform.select({
     mono: "ui-monospace",
   },
   default: {
-    sans: "normal",
-    serif: "serif",
-    rounded: "normal",
+    sans: "PlusJakartaSans",
+    serif: "PlusJakartaSans",
+    rounded: "PlusJakartaSans",
     mono: "monospace",
   },
   web: {
-    sans: "var(--font-display)",
-    serif: "var(--font-serif)",
-    rounded: "var(--font-rounded)",
+    sans: "PlusJakartaSans",
+    serif: "PlusJakartaSans",
+    rounded: "PlusJakartaSans",
     mono: "var(--font-mono)",
   },
 });
 
-/** Serif display face used for headlines and the wordmark. */
-export const DisplayFont = Platform.select({
-  ios: "Georgia",
-  android: "serif",
-  default: "Georgia, serif",
-});
+/** Display face used for headlines and the wordmark. */
+export const DisplayFont = "PlusJakartaSans";
 
 export const Spacing = {
   half: 2,

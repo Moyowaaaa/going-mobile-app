@@ -4,7 +4,12 @@ module.exports = {
   darkMode: "class",
   presets: [require("nativewind/preset")],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["PlusJakartaSans"],
+        display: ["PlusJakartaSans"],
+      },
+    },
   },
   plugins: [],
 };

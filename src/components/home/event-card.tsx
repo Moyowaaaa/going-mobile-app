@@ -4,19 +4,22 @@ import { Pressable, Text, View } from "react-native";
 
 import { EventArt } from "@/components/home/event-art";
 import type { EventItem } from "@/constants/types";
+import { RelativePathString, useRouter } from "expo-router";
 
 type EventCardProps = {
   event: EventItem;
   favorite: boolean;
   onToggleFavorite: () => void;
-  onGetTickets: () => void;
+ 
 };
 
-export function EventCard({ event, favorite, onToggleFavorite, onGetTickets }: EventCardProps) {
+export function EventCard({ event, favorite, onToggleFavorite }: EventCardProps) {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
   const category = event.type[0] ?? "Event";
   const price = event.price === "$0" ? "Free" : `From ${event.price}`;
+  const router = useRouter()
+
 
   return (
     <View>
@@ -74,7 +77,17 @@ export function EventCard({ event, favorite, onToggleFavorite, onGetTickets }: E
         </View>
 
         <Pressable
-          onPress={onGetTickets}
+           onPress={() =>
+            router.push({
+              pathname: "/events/[slug]" as RelativePathString,
+              params: {
+                slug: event.title
+                  .toLowerCase()
+                  .replaceAll(" ", "-")
+                  .replaceAll(":", ""),
+              },
+            })
+          }
           accessibilityRole="button"
           className="mt-4 flex-row items-center justify-center gap-2 rounded-full bg-[#111111] py-3 active:opacity-80 dark:bg-[#f5f2ec]">
           <Text className="text-sm font-semibold text-white dark:text-[#111111]">Get tickets</Text>
